@@ -1,5 +1,7 @@
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
@@ -18,13 +20,16 @@ import javafx.stage.Stage;
 public class HammingPlot extends Application {
 
 	
-	public final int RULENUM = 181;
+	//public final int RULENUM = 181;
 	
 	public static void main(String[] args) {
 		
 		// Launch the JavaFX application. This method creates a 
 		// LineChartExample object and calls its start method.
+		System.out.println("TEST");
+
 		launch(args);
+		System.out.println("TEST");
 	}
 	
 	// The start method is the entry point for any JavaFX application. It is 
@@ -47,10 +52,10 @@ public class HammingPlot extends Application {
 		//
 		// Each XYChart.Series object has a name field. This field is used to 
 		// label the data in the chart legend.
-		XYChart.Series<Number, Number> sinSeries = new XYChart.Series<>();
-		sinSeries.setName("sin(x)");
-		XYChart.Series<Number, Number> cosSeries = new XYChart.Series<>();
-		cosSeries.setName("cos(x)");
+		XYChart.Series<Number, Number> circularBc = new XYChart.Series<>();
+		circularBc.setName("circular boundary conditions");
+		XYChart.Series<Number, Number> fixedBc = new XYChart.Series<>();
+		fixedBc.setName("fixed boundary conditions (OFF-OFF)");
 
 		// Each XYChart.Series object stores a list of data points. The getData 
 		// method returns a reference to this list.
@@ -58,26 +63,45 @@ public class HammingPlot extends Application {
 		// Data is added to an XYChart.Series by adding it to its data list. 
 		// The following lines simply store references to the data lists of 
 		// sinSeries and cosSeries for use in the for-loop below.
-		List<XYChart.Data<Number, Number>> sinData = sinSeries.getData();
-		List<XYChart.Data<Number, Number>> cosData = cosSeries.getData();
+		List<XYChart.Data<Number, Number>> circularData = circularBc.getData();
+		List<XYChart.Data<Number, Number>> fixedData = fixedBc.getData();
 
 		// Calculate some data to display in the LineChart. To create your 
 		// automaton plots, replace this loop with code that reads your Hamming 
 		// distance or subrule counts data files.
-		for (int idx = 0; idx <= 100; ++idx) {
-			double x = 2 * Math.PI * idx / 100;
-			double sinX = Math.sin(x);
-			double cosX = Math.cos(x);
+		System.out.println("test 1");
 
-			// Each data point in an XYChart.Series must be wrapped in an 
-			// XYChart.Data object. The following lines add a point to 
-			// sinSeries and cosSeries by adding a point to their data lists.
-			XYChart.Data<Number, Number> sinPt = new XYChart.Data<>(x, sinX);
-			XYChart.Data<Number, Number> cosPt = new XYChart.Data<>(x, cosX);
-			sinData.add(sinPt);
-			cosData.add(cosPt);
+		BufferedReader readerCirc = new BufferedReader(new FileReader("C:\\Users\\darre\\Desktop\\Project3\\project-3-Darrenfisherlol\\data\\hamming-elementary181-circularbc.txt"));
+		String line = readerCirc.readLine();
+		
+		int xAxisNum = 1;
+		int num = 0;
+		
+		while (line != null) {
+			num = Integer.parseInt(line);
+			XYChart.Data<Number, Number> circPoints = new XYChart.Data<>(xAxisNum, num);
+			circularData.add(circPoints);
+			line = readerCirc.readLine();	
+			xAxisNum = xAxisNum + 1;
 		}
+		readerCirc.close();
 
+		BufferedReader readerFixed = new BufferedReader(new FileReader("C:\\Users\\darre\\Desktop\\Project3\\project-3-Darrenfisherlol\\data\\hamming-elementary181-fixedbc-off-off.txt"));
+		String lineFixed = readerFixed.readLine();
+		
+		int xAxisFixed = 1;
+		num = 0;
+		
+		while (lineFixed != null) {
+			num = Integer.parseInt(lineFixed);
+			XYChart.Data<Number, Number> fixedPoints = new XYChart.Data<>(xAxisNum, num);
+			fixedData.add(fixedPoints);
+			line = readerFixed.readLine();	
+			xAxisFixed = xAxisFixed + 1;
+		}
+		readerFixed.close();
+		
+		System.out.println("test 2");
 		// Create the x-axis and y-axis for the LineChart. The NumberAxis class 
 		// is used because the data points are pairs of Numbers. If either the 
 		// x-values or y-values were Strings, the CategoryAxis class would need 
@@ -85,8 +109,8 @@ public class HammingPlot extends Application {
 		//
 		// NumberAxis has an overloaded constructor. The version used here has 
 		// four parameters: the label, lower bound, upper bound, and tick unit.
-		NumberAxis xAxis = new NumberAxis("x", 0, 2*Math.PI, Math.PI/2);
-		NumberAxis yAxis = new NumberAxis("f(x)", -1, 1, 0.5);
+		NumberAxis xAxis = new NumberAxis("step number", 0, 100, 2);
+		NumberAxis yAxis = new NumberAxis("Hamming Distance", 0, 100, 2);
 
 		// Create the LineChart. The constructor takes references to both axes.
 		//
@@ -96,8 +120,9 @@ public class HammingPlot extends Application {
 		// By default, each data point is shown in the chart with a symbol, and 
 		// the symbols are connected by lines. Setting the createSymbols field 
 		// to false removes the symbols and only shows the lines.
+		
 		LineChart<Number, Number> chart = new LineChart<>(xAxis, yAxis);
-		chart.setTitle("LineChart Example");
+		chart.setTitle("Elementary Rule 181 (Darren Fisher, ID#113463319)");
 		chart.setCreateSymbols(false);
 
 		// The data series shown in a LineChart are stored in a list. The 
@@ -105,8 +130,10 @@ public class HammingPlot extends Application {
 		// similarity to the getData method of XYChart.Series.) The following 
 		// lines add sinSeries and cosSeries to the LineChart.
 		List<XYChart.Series<Number, Number>> seriesList = chart.getData();
-		seriesList.add(sinSeries);
-		seriesList.add(cosSeries);
+		seriesList.add(circularBc);
+		seriesList.add(fixedBc);
+
+		System.out.println("test 3");
 
 		// The graphical components of a JavaFX application are stored in 
 		// Scenes. In order to display the LineChart, it must be added to a 
@@ -122,8 +149,10 @@ public class HammingPlot extends Application {
 		stage.setTitle("Elementary Rule 181 (Darren Fisher, ID # 113463319)");
 		stage.show();
 		
+		System.out.println("test 4");
+
 		// Save a copy of the Scene as a PNG image.
-		String filename = "plots" + File.separator + "hamming-elementary<rule-num>.png";
+		String filename = "plots" + File.separator + "hamming-elementary181.png";
 		saveScene(scene, filename);
 	}
 	
