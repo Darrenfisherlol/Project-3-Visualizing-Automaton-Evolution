@@ -71,37 +71,84 @@ public class HammingPlot extends Application {
 		// distance or subrule counts data files.
 		System.out.println("test 1");
 
-		BufferedReader readerCirc = new BufferedReader(new FileReader("C:\\Users\\darre\\Desktop\\Project3\\project-3-Darrenfisherlol\\data\\hamming-elementary181-circularbc.txt"));
-		String line = readerCirc.readLine();
+//		BufferedReader readerCirc = new BufferedReader(new FileReader("C:\\Users\\darre\\Desktop\\Project3\\project-3-Darrenfisherlol\\data\\hamming-elementary181-circularbc.txt"));
+//		String line = readerCirc.readLine();
+//		
+//		int xAxisNum = 1;
+//		int num = 0;
+//		
+//		while (line != null) {
+//			num = Integer.parseInt(line);
+//			XYChart.Data<Number, Number> circPoints = new XYChart.Data<>(xAxisNum, num);
+//			circularData.add(circPoints);
+//			line = readerCirc.readLine();	
+//			xAxisNum = xAxisNum + 1;
+//		}
+//		readerCirc.close();
+//
+//		BufferedReader readerFixed = new BufferedReader(new FileReader("C:\\Users\\darre\\Desktop\\Project3\\project-3-Darrenfisherlol\\data\\hamming-elementary181-fixedbc-off-off.txt"));
+//		String lineFixed = readerFixed.readLine();
+//		
+//		int xAxisFixed = 1;
+//		num = 0;
+//		
+//		while (lineFixed != null) {
+//			num = Integer.parseInt(lineFixed);
+//			XYChart.Data<Number, Number> fixedPoints = new XYChart.Data<>(xAxisNum, num);
+//			fixedData.add(fixedPoints);
+//			line = readerFixed.readLine();	
+//			xAxisFixed = xAxisFixed + 1;
+//		}
+//		readerFixed.close();
 		
-		int xAxisNum = 1;
-		int num = 0;
 		
-		while (line != null) {
-			num = Integer.parseInt(line);
-			XYChart.Data<Number, Number> circPoints = new XYChart.Data<>(xAxisNum, num);
-			circularData.add(circPoints);
-			line = readerCirc.readLine();	
-			xAxisNum = xAxisNum + 1;
-		}
-		readerCirc.close();
+		BufferedReader readerCircle = new BufferedReader(new FileReader("C:\\Users\\darre\\Desktop\\Project3\\project-3-Darrenfisherlol\\data\\hamming-elementary181-circularbc.txt"));
+		
+		String line = readerCircle.readLine();
+		System.out.println("Beginning");
+		int x = 1;
+		XYChart.Data<Number, Number> circPt = new XYChart.Data<>();
+		
+		while(line != null) {
+			System.out.println("Number x: " + x);
 
-		BufferedReader readerFixed = new BufferedReader(new FileReader("C:\\Users\\darre\\Desktop\\Project3\\project-3-Darrenfisherlol\\data\\hamming-elementary181-fixedbc-off-off.txt"));
-		String lineFixed = readerFixed.readLine();
-		
-		int xAxisFixed = 1;
-		num = 0;
-		
-		while (lineFixed != null) {
-			num = Integer.parseInt(lineFixed);
-			XYChart.Data<Number, Number> fixedPoints = new XYChart.Data<>(xAxisNum, num);
-			fixedData.add(fixedPoints);
-			line = readerFixed.readLine();	
-			xAxisFixed = xAxisFixed + 1;
+			int y = Integer.parseInt(line);
+			circPt = new XYChart.Data<>(x, y);
+			circularData.add(circPt);
+			line = readerCircle.readLine();
+			x++;
 		}
+		//circularData.add(circPt);
+		readerCircle.close();
+		
+		System.out.println("TEST middle of loop");
+		
+		
+		BufferedReader readerFixed = new BufferedReader(new FileReader("C:\\Users\\darre\\Desktop\\Project3\\project-3-Darrenfisherlol\\data\\hamming-elementary181-fixedbc-off-off.txt"));
+		
+		String lineFixed = readerFixed.readLine();
+		x = 1;
+		XYChart.Data<Number, Number> fixPt = new XYChart.Data<>();
+
+		while(lineFixed != null) {
+			int y = Integer.parseInt(lineFixed);
+			fixPt = new XYChart.Data<>(x, y);
+			fixedData.add(fixPt);
+			lineFixed = readerFixed.readLine();
+			x++;
+		}
+		//fixedData.add(fixPt);
 		readerFixed.close();
 		
-		System.out.println("test 2");
+
+		System.out.println("TEST GG");
+		
+		
+		
+		
+		
+		
+		
 		// Create the x-axis and y-axis for the LineChart. The NumberAxis class 
 		// is used because the data points are pairs of Numbers. If either the 
 		// x-values or y-values were Strings, the CategoryAxis class would need 
@@ -109,8 +156,8 @@ public class HammingPlot extends Application {
 		//
 		// NumberAxis has an overloaded constructor. The version used here has 
 		// four parameters: the label, lower bound, upper bound, and tick unit.
-		NumberAxis xAxis = new NumberAxis("step number", 0, 100, 2);
-		NumberAxis yAxis = new NumberAxis("Hamming Distance", 0, 100, 2);
+		NumberAxis xAxis = new NumberAxis("step number", 0, 100, 5);
+		NumberAxis yAxis = new NumberAxis("Hamming Distance", 0, 100, 5);
 
 		// Create the LineChart. The constructor takes references to both axes.
 		//
