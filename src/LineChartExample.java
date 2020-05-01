@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 // Any JavaFX application must extend the Application class, which is abstract.
 public class LineChartExample extends Application {
 
+	
 	public static void main(String[] args) {
 		
 		// Launch the JavaFX application. This method creates a 
