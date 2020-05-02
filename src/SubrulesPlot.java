@@ -84,9 +84,9 @@ public class SubrulesPlot extends Application {
 		List<XYChart.Data<Number, Number>> twoData = ChartTwo.getData();
 		List<XYChart.Data<Number, Number>> threeData = ChartThree.getData();
 		List<XYChart.Data<Number, Number>> fourData = ChartFour.getData();
-		List<XYChart.Data<Number, Number>> FiveData = ChartSix.getData();
-		List<XYChart.Data<Number, Number>> sixData = ChartFour.getData();
-		List<XYChart.Data<Number, Number>> sevenData = ChartSix.getData();
+		List<XYChart.Data<Number, Number>> fiveData = ChartFive.getData();
+		List<XYChart.Data<Number, Number>> sixData = ChartSix.getData();
+		List<XYChart.Data<Number, Number>> sevenData = ChartSeven.getData();
 
 
 		// Calculate some data to display in the LineChart. To create your 
@@ -101,38 +101,63 @@ public class SubrulesPlot extends Application {
 		
 		XYChart.Data<Number, Number> zeroPt = new XYChart.Data<>();
 		XYChart.Data<Number, Number> onePt = new XYChart.Data<>();
-		XYChart.Data<Number, Number> TwoPt = new XYChart.Data<>();
-		XYChart.Data<Number, Number> ThreePt = new XYChart.Data<>();
-		XYChart.Data<Number, Number> FourPt = new XYChart.Data<>();
-		XYChart.Data<Number, Number> FivePt = new XYChart.Data<>();
-		XYChart.Data<Number, Number> SixPt = new XYChart.Data<>();
-		XYChart.Data<Number, Number> SevenPt = new XYChart.Data<>();
+		XYChart.Data<Number, Number> twoPt = new XYChart.Data<>();
+		XYChart.Data<Number, Number> threePt = new XYChart.Data<>();
+		XYChart.Data<Number, Number> fourPt = new XYChart.Data<>();
+		XYChart.Data<Number, Number> fivePt = new XYChart.Data<>();
+		XYChart.Data<Number, Number> sixPt = new XYChart.Data<>();
+		XYChart.Data<Number, Number> sevenPt = new XYChart.Data<>();
 
-		BufferedReader readerCircle = new BufferedReader(new FileReader("C:\\Users\\darre\\Desktop\\Project3\\project-3-Darrenfisherlol\\data\\hamming-elementary181-circularbc.csv"));
+		BufferedReader readerCircle = new BufferedReader(new FileReader("C:\\Users\\darre\\Desktop\\Project3\\project-3-Darrenfisherlol\\data\\subrules-elementary181-circularbc.csv"));
 		
 		String line = readerCircle.readLine();
-		int x = 1;
+		String[] DateDoubleArray = new String[7];
+		
+		int x = 0;
 		while(line != null) {
-			System.out.println("Number x: " + x);
+			DateDoubleArray = line.split(",");
+			
+			int yAxis = Integer.parseInt(DateDoubleArray[0]);
+			zeroPt = new XYChart.Data<>(x, yAxis);
+			
+			yAxis = Integer.parseInt(DateDoubleArray[1]);
+			onePt = new XYChart.Data<>(x, yAxis);
+			
+			yAxis = Integer.parseInt(DateDoubleArray[2]);
+			twoPt = new XYChart.Data<>(x, yAxis);
+			
+			yAxis = Integer.parseInt(DateDoubleArray[3]);
+			threePt = new XYChart.Data<>(x, yAxis);
+			
+			yAxis = Integer.parseInt(DateDoubleArray[4]);
+			fourPt = new XYChart.Data<>(x, yAxis);
+			
+			yAxis = Integer.parseInt(DateDoubleArray[5]);
+			fivePt = new XYChart.Data<>(x, yAxis);
+			
+			yAxis = Integer.parseInt(DateDoubleArray[6]);
+			sixPt = new XYChart.Data<>(x, yAxis);
+			
+			yAxis = Integer.parseInt(DateDoubleArray[7]);
+			sevenPt = new XYChart.Data<>(x, yAxis);
 
-			int y = Integer.parseInt(line);
-			zeroPt = new XYChart.Data<>(x, y);
 			zeroData.add(zeroPt);
+			oneData.add(onePt);
+			twoData.add(twoPt);
+			threeData.add(threePt);
+			fourData.add(fourPt);
+			fiveData.add(fivePt);
+			sixData.add(sixPt);
+			sevenData.add(sevenPt);
+			
+			
 			line = readerCircle.readLine();
 			x++;
 		}
+		
 		readerCircle.close();
 		
-
-		
-		
-		
-		
-//		
-//		XYChart.Data<Number, Number> sinPt = new XYChart.Data<>(x, sinX);
-//		XYChart.Data<Number, Number> cosPt = new XYChart.Data<>(x, cosX);
-//		sinData.add(sinPt);
-//		cosData.add(cosPt);
+	
 		
 
 		// Create the x-axis and y-axis for the LineChart. The NumberAxis class 
@@ -186,7 +211,7 @@ public class SubrulesPlot extends Application {
 		stage.show();
 		
 		// Save a copy of the Scene as a PNG image.
-		String filename = "plots" + File.separator + "subrules-elementary<181>-circularbc.png";
+		String filename = "plots" + File.separator + "subrules-elementary181-circularbc.png";
 		saveScene(scene, filename);
 	}
 	

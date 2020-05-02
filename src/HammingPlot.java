@@ -125,8 +125,8 @@ public class HammingPlot extends Application {
 		//
 		// NumberAxis has an overloaded constructor. The version used here has 
 		// four parameters: the label, lower bound, upper bound, and tick unit.
-		NumberAxis xAxis = new NumberAxis("step number", 0, 100, 5);
-		NumberAxis yAxis = new NumberAxis("Hamming Distance", 0, 100, 5);
+		NumberAxis xAxis = new NumberAxis("step number", 0, 100, 10);
+		NumberAxis yAxis = new NumberAxis("Hamming Distance", 0, 100, 10);
 
 		// Create the LineChart. The constructor takes references to both axes.
 		//
