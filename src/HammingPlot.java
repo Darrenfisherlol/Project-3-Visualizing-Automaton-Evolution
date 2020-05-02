@@ -71,7 +71,7 @@ public class HammingPlot extends Application {
 		// distance or subrule counts data files.
 //		System.out.println("test 1");
 
-		BufferedReader readerCircle = new BufferedReader(new FileReader("C:\\Users\\darre\\Desktop\\Project3\\project-3-Darrenfisherlol\\data\\hamming-elementary109-circularbc.txt"));
+		BufferedReader readerCircle = new BufferedReader(new FileReader("C:\\Users\\darre\\Desktop\\Project3\\project-3-Darrenfisherlol\\data\\hamming-elementary181-circularbc.txt"));
 		
 		String line = readerCircle.readLine();
 //		System.out.println("Beginning");
@@ -93,7 +93,7 @@ public class HammingPlot extends Application {
 //		System.out.println("TEST middle of loop");
 		
 		
-		BufferedReader readerFixed = new BufferedReader(new FileReader("C:\\Users\\darre\\Desktop\\Project3\\project-3-Darrenfisherlol\\data\\hamming-elementary109-fixedbc-off-off.txt"));
+		BufferedReader readerFixed = new BufferedReader(new FileReader("C:\\Users\\darre\\Desktop\\Project3\\project-3-Darrenfisherlol\\data\\hamming-elementary181-fixedbc-off-off.txt"));
 		
 		String lineFixed = readerFixed.readLine();
 		x = 1;
