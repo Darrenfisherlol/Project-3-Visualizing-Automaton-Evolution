@@ -1,5 +1,7 @@
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
@@ -47,10 +49,29 @@ public class SubrulesPlot extends Application {
 		//
 		// Each XYChart.Series object has a name field. This field is used to 
 		// label the data in the chart legend.
-		XYChart.Series<Number, Number> sinSeries = new XYChart.Series<>();
-		sinSeries.setName("sin(x)");
-		XYChart.Series<Number, Number> cosSeries = new XYChart.Series<>();
-		cosSeries.setName("cos(x)");
+		XYChart.Series<Number, Number> ChartZero = new XYChart.Series<>();
+		ChartZero.setName("subrule 0");
+		
+		XYChart.Series<Number, Number> ChartOne = new XYChart.Series<>();
+		ChartOne.setName("subrule 1");
+		
+		XYChart.Series<Number, Number> ChartTwo = new XYChart.Series<>();
+		ChartTwo.setName("subrule 2");
+		
+		XYChart.Series<Number, Number> ChartThree = new XYChart.Series<>();
+		ChartThree.setName("subrule 3");
+		
+		XYChart.Series<Number, Number> ChartFour = new XYChart.Series<>();
+		ChartFour.setName("subrule 4");
+		
+		XYChart.Series<Number, Number> ChartFive = new XYChart.Series<>();
+		ChartFive.setName("subrule 5");
+		
+		XYChart.Series<Number, Number> ChartSix = new XYChart.Series<>();
+		ChartSix.setName("subrule 6");
+		
+		XYChart.Series<Number, Number> ChartSeven = new XYChart.Series<>();
+		ChartSeven.setName("subrule 7");
 
 		// Each XYChart.Series object stores a list of data points. The getData 
 		// method returns a reference to this list.
@@ -58,25 +79,61 @@ public class SubrulesPlot extends Application {
 		// Data is added to an XYChart.Series by adding it to its data list. 
 		// The following lines simply store references to the data lists of 
 		// sinSeries and cosSeries for use in the for-loop below.
-		List<XYChart.Data<Number, Number>> sinData = sinSeries.getData();
-		List<XYChart.Data<Number, Number>> cosData = cosSeries.getData();
+		List<XYChart.Data<Number, Number>> zeroData = ChartZero.getData();
+		List<XYChart.Data<Number, Number>> oneData = ChartOne.getData();
+		List<XYChart.Data<Number, Number>> twoData = ChartTwo.getData();
+		List<XYChart.Data<Number, Number>> threeData = ChartThree.getData();
+		List<XYChart.Data<Number, Number>> fourData = ChartFour.getData();
+		List<XYChart.Data<Number, Number>> FiveData = ChartSix.getData();
+		List<XYChart.Data<Number, Number>> sixData = ChartFour.getData();
+		List<XYChart.Data<Number, Number>> sevenData = ChartSix.getData();
+
 
 		// Calculate some data to display in the LineChart. To create your 
 		// automaton plots, replace this loop with code that reads your Hamming 
 		// distance or subrule counts data files.
-		for (int idx = 0; idx <= 100; ++idx) {
-			double x = 2 * Math.PI * idx / 100;
-			double sinX = Math.sin(x);
-			double cosX = Math.cos(x);
-
+		
 			// Each data point in an XYChart.Series must be wrapped in an 
 			// XYChart.Data object. The following lines add a point to 
 			// sinSeries and cosSeries by adding a point to their data lists.
-			XYChart.Data<Number, Number> sinPt = new XYChart.Data<>(x, sinX);
-			XYChart.Data<Number, Number> cosPt = new XYChart.Data<>(x, cosX);
-			sinData.add(sinPt);
-			cosData.add(cosPt);
+		
+		System.out.println("Beginning");
+		
+		XYChart.Data<Number, Number> zeroPt = new XYChart.Data<>();
+		XYChart.Data<Number, Number> onePt = new XYChart.Data<>();
+		XYChart.Data<Number, Number> TwoPt = new XYChart.Data<>();
+		XYChart.Data<Number, Number> ThreePt = new XYChart.Data<>();
+		XYChart.Data<Number, Number> FourPt = new XYChart.Data<>();
+		XYChart.Data<Number, Number> FivePt = new XYChart.Data<>();
+		XYChart.Data<Number, Number> SixPt = new XYChart.Data<>();
+		XYChart.Data<Number, Number> SevenPt = new XYChart.Data<>();
+
+		BufferedReader readerCircle = new BufferedReader(new FileReader("C:\\Users\\darre\\Desktop\\Project3\\project-3-Darrenfisherlol\\data\\hamming-elementary181-circularbc.csv"));
+		
+		String line = readerCircle.readLine();
+		int x = 1;
+		while(line != null) {
+			System.out.println("Number x: " + x);
+
+			int y = Integer.parseInt(line);
+			zeroPt = new XYChart.Data<>(x, y);
+			zeroData.add(zeroPt);
+			line = readerCircle.readLine();
+			x++;
 		}
+		readerCircle.close();
+		
+
+		
+		
+		
+		
+//		
+//		XYChart.Data<Number, Number> sinPt = new XYChart.Data<>(x, sinX);
+//		XYChart.Data<Number, Number> cosPt = new XYChart.Data<>(x, cosX);
+//		sinData.add(sinPt);
+//		cosData.add(cosPt);
+		
 
 		// Create the x-axis and y-axis for the LineChart. The NumberAxis class 
 		// is used because the data points are pairs of Numbers. If either the 
@@ -85,8 +142,8 @@ public class SubrulesPlot extends Application {
 		//
 		// NumberAxis has an overloaded constructor. The version used here has 
 		// four parameters: the label, lower bound, upper bound, and tick unit.
-		NumberAxis xAxis = new NumberAxis("x", 0, 2*Math.PI, Math.PI/2);
-		NumberAxis yAxis = new NumberAxis("f(x)", -1, 1, 0.5);
+		NumberAxis xAxis = new NumberAxis("step number", 0, 100, 5);
+		NumberAxis yAxis = new NumberAxis("subrule count", 0, 100, 5);
 
 		// Create the LineChart. The constructor takes references to both axes.
 		//
@@ -97,7 +154,7 @@ public class SubrulesPlot extends Application {
 		// the symbols are connected by lines. Setting the createSymbols field 
 		// to false removes the symbols and only shows the lines.
 		LineChart<Number, Number> chart = new LineChart<>(xAxis, yAxis);
-		chart.setTitle("LineChart Example");
+		chart.setTitle("Elementary Rule 181 (Darren Fisher, ID#113463319)");
 		chart.setCreateSymbols(false);
 
 		// The data series shown in a LineChart are stored in a list. The 
@@ -105,8 +162,14 @@ public class SubrulesPlot extends Application {
 		// similarity to the getData method of XYChart.Series.) The following 
 		// lines add sinSeries and cosSeries to the LineChart.
 		List<XYChart.Series<Number, Number>> seriesList = chart.getData();
-		seriesList.add(sinSeries);
-		seriesList.add(cosSeries);
+		seriesList.add(ChartZero);
+		seriesList.add(ChartOne);
+		seriesList.add(ChartTwo);
+		seriesList.add(ChartThree);
+		seriesList.add(ChartFour);
+		seriesList.add(ChartFive);
+		seriesList.add(ChartSix);
+		seriesList.add(ChartSeven);
 
 		// The graphical components of a JavaFX application are stored in 
 		// Scenes. In order to display the LineChart, it must be added to a 
@@ -123,7 +186,7 @@ public class SubrulesPlot extends Application {
 		stage.show();
 		
 		// Save a copy of the Scene as a PNG image.
-		String filename = "plots" + File.separator + "subrules-elementary<rule-num>-circularbc.png";
+		String filename = "plots" + File.separator + "subrules-elementary<181>-circularbc.png";
 		saveScene(scene, filename);
 	}
 	

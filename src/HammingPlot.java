@@ -69,43 +69,12 @@ public class HammingPlot extends Application {
 		// Calculate some data to display in the LineChart. To create your 
 		// automaton plots, replace this loop with code that reads your Hamming 
 		// distance or subrule counts data files.
-		System.out.println("test 1");
+//		System.out.println("test 1");
 
-//		BufferedReader readerCirc = new BufferedReader(new FileReader("C:\\Users\\darre\\Desktop\\Project3\\project-3-Darrenfisherlol\\data\\hamming-elementary181-circularbc.txt"));
-//		String line = readerCirc.readLine();
-//		
-//		int xAxisNum = 1;
-//		int num = 0;
-//		
-//		while (line != null) {
-//			num = Integer.parseInt(line);
-//			XYChart.Data<Number, Number> circPoints = new XYChart.Data<>(xAxisNum, num);
-//			circularData.add(circPoints);
-//			line = readerCirc.readLine();	
-//			xAxisNum = xAxisNum + 1;
-//		}
-//		readerCirc.close();
-//
-//		BufferedReader readerFixed = new BufferedReader(new FileReader("C:\\Users\\darre\\Desktop\\Project3\\project-3-Darrenfisherlol\\data\\hamming-elementary181-fixedbc-off-off.txt"));
-//		String lineFixed = readerFixed.readLine();
-//		
-//		int xAxisFixed = 1;
-//		num = 0;
-//		
-//		while (lineFixed != null) {
-//			num = Integer.parseInt(lineFixed);
-//			XYChart.Data<Number, Number> fixedPoints = new XYChart.Data<>(xAxisNum, num);
-//			fixedData.add(fixedPoints);
-//			line = readerFixed.readLine();	
-//			xAxisFixed = xAxisFixed + 1;
-//		}
-//		readerFixed.close();
-		
-		
 		BufferedReader readerCircle = new BufferedReader(new FileReader("C:\\Users\\darre\\Desktop\\Project3\\project-3-Darrenfisherlol\\data\\hamming-elementary181-circularbc.txt"));
 		
 		String line = readerCircle.readLine();
-		System.out.println("Beginning");
+//		System.out.println("Beginning");
 		int x = 1;
 		XYChart.Data<Number, Number> circPt = new XYChart.Data<>();
 		
@@ -121,7 +90,7 @@ public class HammingPlot extends Application {
 		//circularData.add(circPt);
 		readerCircle.close();
 		
-		System.out.println("TEST middle of loop");
+//		System.out.println("TEST middle of loop");
 		
 		
 		BufferedReader readerFixed = new BufferedReader(new FileReader("C:\\Users\\darre\\Desktop\\Project3\\project-3-Darrenfisherlol\\data\\hamming-elementary181-fixedbc-off-off.txt"));
@@ -141,7 +110,7 @@ public class HammingPlot extends Application {
 		readerFixed.close();
 		
 
-		System.out.println("TEST GG");
+//		System.out.println("TEST GG");
 		
 		
 		
@@ -180,7 +149,7 @@ public class HammingPlot extends Application {
 		seriesList.add(circularBc);
 		seriesList.add(fixedBc);
 
-		System.out.println("test 3");
+//		System.out.println("test 3");
 
 		// The graphical components of a JavaFX application are stored in 
 		// Scenes. In order to display the LineChart, it must be added to a 
@@ -196,7 +165,7 @@ public class HammingPlot extends Application {
 		stage.setTitle("Elementary Rule 181 (Darren Fisher, ID # 113463319)");
 		stage.show();
 		
-		System.out.println("test 4");
+//		System.out.println("test 4");
 
 		// Save a copy of the Scene as a PNG image.
 		String filename = "plots" + File.separator + "hamming-elementary181.png";
